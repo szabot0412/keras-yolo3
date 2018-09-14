@@ -35,6 +35,12 @@ parser.add_argument(
     '--weights_only',
     help='Save as Keras weights file instead of model file.',
     action='store_true')
+parser.add_argument(
+    '-s',
+    '--size',
+    type=int,
+    help='Input image pixel size.',
+    action='store')
 
 def unique_config_sections(config_file):
     """Convert all config sections to have unique names.
@@ -85,7 +91,7 @@ def _main(args):
     cfg_parser.read_file(unique_config_file)
 
     print('Creating Keras model.')
-    input_layer = Input(shape=(416, 416, 3))
+    input_layer = Input(shape=(args.size, args.size, 3))
     prev_layer = input_layer
     all_layers = []
 
